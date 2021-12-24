@@ -1,0 +1,52 @@
+{% extends 'base.html'%}
+{% load bootstrap4 %}
+
+
+{% block content %}
+{{block.super}}
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="https://wallpapercave.com/wp/wp7453603.jpg" class="d-block w-100" alt="..." height="700">
+    </div>
+    <div class="carousel-item">
+      <img src="https://media.istockphoto.com/vectors/vector-flat-golden-trophy-vector-id1176397624?k=20&m=1176397624&s=612x612&w=0&h=yICH7de39SwB1sDP4-kBHFS8bJz4srdu_HOrBC9KvzY=" class="d-block w-100" alt="...">
+    </div>
+    <div class="carousel-item">
+      <img src="https://media.gettyimages.com/photos/trophy-at-award-ceremony-picture-id561094061?s=612x612" class="d-block w-100" alt="...">
+    </div>
+  </div>
+</div>
+  <h3 class="text-center" style="color: brown;"><marquee behavior="" direction="left">Check my projects <span style="color: blue;">and get to</span> hire me &#128515; <span style="color: blue;">Blue button</span> </marquee> </h3>
+  <div class="row">
+    
+    {% for uploads in upload %}
+    <div class="col-md-6">
+        
+        <div class="card-group">
+            <div class="card">
+                <p class="text-center"><span style="color: maroon;">User: </span>{{uploads.user}}</p>
+                <a href="{% url 'project_details' uploads.id %}">
+                  <img src="{{ uploads.image.url }}" class="card-img-top responsive" height="400" alt="Personal">
+              </a>
+                <div class="card-body">
+                    <h5 style="font-style: oblique;" class="card-title">Name: <span style="color: maroon;">{{uploads.name}}</span></h5>
+                    <p style="font-style: oblique;" class="card-text">Description: <span style="color: maroon;">{{uploads.description}}</span></p>
+                    <p style="font-style: oblique;"  class="card-text">Category: <span style="color: maroon;">{{uploads.category}}</span></p>
+                    <a href="{{uploads.url}}">{{uploads.url}}</a>
+                </div>
+                <div class="card-footer">
+                    <small class="text-muted"><span style="color: #192841;">Time of posting: </span><span style="color: maroon;"> {{uploads.date_posted|timesince}}</span></small>
+                </div>
+                <button class="btn btn-primary" style="width: 13em;"><h4 style="color: white;" class="text-center"><a style="color: white;"  href="{% url 'project_details' uploads.id %}">Rate the project</a></h4></button>
+            </div>
+
+        </div>
+        
+    </div>
+    {% endfor %}
+</div>
+
+
+{% endblock %}
