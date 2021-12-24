@@ -1,62 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
-<body>
-  {% block styles %}
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  {% endblock %}
-  <nav class="navbar navbar-default" style="padding: 1.3em; background-color: #ffffff;">
-    <div class="container-fluid">
-      <div style="background-color: white; padding: .2em;"><img src="https://cdn-icons-png.flaticon.com/512/819/819590.png" width="50" alt=""></div>
-      <div class="col-sm-2 col-md-2 navbar-header">
-        
-        <button class="btn btn-default" style="border: .5em solid #192841; border-radius: 10px;"><a class="navbar-brand" href=""><a href="{% url 'index' %}">HOME </a> </a></button>
-      </div>
+<nav class="navbar navbar-expand-md bg-dark navbar-dark">
+  <!-- Brand -->
+  <a class="navbar-brand" href="#">Home</a>
 
-      <div class="col-sm-3 col-md-3 navbar-right">
-        <h2 style="color: #192841"><span>My</span> projects <span>Portfolio</span></h2>
+  <!-- Toggler/collapsibe Button -->
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+    <span class="navbar-toggler-icon"></span>
+  </button>
 
-      </div>
-      <button class="btn btn-default" style="border: .5em solid #192841; border-radius: 10px;"><a href="/create_profile" class="col-sm-3 col-md-3 col-lg-3">Create Profile</a></button>
-      <button class="btn btn-default" style="border: .5em solid #192841; border-radius: 10px;"><a href="/accounts/profile/" class="col-sm-3 col-md-3 col-lg-3">Profile</a></button>
-      <div class="col-sm-1 col-md-1">
-        <button class="btn btn-default" style="border: .5em solid #192841; border-radius: 10px;"><a href="/search" class="col-sm-3 col-md-3 col-lg-3">Search</a></button>
-      </div>
-       
-      
-        <ul>
-          <li class="dropdown">
-            <button class="btn btn-default" style="border: .5em solid #192841; border-radius: 10px;"><a href="/accounts/login" class="dropdown-toggle btn btn-default" data-toggle="dropdown" role="button" aria-expanded="false"> <span class="caret" style="color: blue;"> login</span></a></button>
-            <ul class="dropdown-menu" role="menu">
-              <li>
-                <a href="{% url 'index' %}">Home</a>
-              </li>
-              <li>
-                <a href="/accounts/password/change">Change Password</a>
-              </li>
-              <li>
-                <a href="">My Profile</a>
-              </li>
-              <li>
-                <a href="/accounts/login">Logout</a>
-              </li>
-            </ul>
-          </li>
-        </ul>
-      
-        <li>
-          <a href="/accounts/login" class="btn btn-default">Login</a>
-        </li>
-      
-<div style="background-color: white; padding: .2em;">
-  <img src="https://cdn-icons-png.flaticon.com/512/4185/4185562.png" width="50" alt="">
-</div>
-    </div>
-  </nav>
-</body>
-</html>
+  <!-- Navbar links -->
+  <div class="collapse navbar-collapse" id="collapsibleNavbar">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" href="#">HOOD</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">ADVENTURE</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">HOMIES</a>
+      </li>
+    </ul>
+  </div>
+</nav>
