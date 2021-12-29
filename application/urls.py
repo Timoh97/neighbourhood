@@ -9,6 +9,7 @@ from . import views
 urlpatterns = [
 path('',views.index, name='index'),
 path('home/',views.home, name='home'),
+path('accounts/profile/', views.index, name='index'),
 path("profile/", views.profile, name="profile"), # profile page
 path("profile/update/", views.update_profile, name="update_profile"), # profile update page
 ]
