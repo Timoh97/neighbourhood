@@ -14,17 +14,17 @@
           </form>
 
         <!--Django Model-->
-        <h2 class="my-4">Neighbourhood</h2>
+        <h2 class="my-4">Profile</h2>
         <div class="row">
           {% for p in profile %}
           <div class="col-lg-4 col-md-6 col-sm-12 pb-4">
             <div class="card h-100 p-4">
                 <h3>Name: {{p.name}}</h3>
-              <img src="{{ p.picture_pic.url }}" class="card-img-top">
+              <img src="{{ p.picture.url }}" class="card-img-top">
               
-              <p>Police contacts: {{p.email}}</p>
-              <p>Location: {{hood.location}}</p>
-              <p>Number of people: {{p.neighbourhood}}</p>
+              <p>Email: {{p.email}}</p>
+              <p>Location: {{p.location}}</p>
+              <p>Neighbourhood: {{p.neighbourhood}}</p>
               
             </div>
           </div>

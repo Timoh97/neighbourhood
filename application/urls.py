@@ -5,6 +5,7 @@ from django.urls import path
 from . import views
 
 
+app_name = 'application'
 
 urlpatterns = [
 path('',views.index, name='index'),
@@ -12,7 +13,7 @@ path("home/", views.home, name="home"),
 path("profile/", views.profile, name="profile"),
 path("business/", views.business, name="business"),
 path("post/", views.post, name="post"),
-path('accounts/profile/', views.index, name='index'),
+path('accounts/profile/', views.index, name='accounts'),
 
 ]
 
