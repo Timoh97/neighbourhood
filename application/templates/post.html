@@ -1,0 +1,38 @@
+
+{% block content %}  
+
+{% load crispy_forms_tags %}  
+    
+        <div class="container">
+
+          <!--Django Form-->
+          <h2 class="my-4">CREATE POST</h2>
+          <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+              {{form|crispy}}
+                <button class="btn btn-dark my-4" type="submit">Submit</button>
+          </form>
+
+        <!--Django Model-->
+        <h2 class="my-4">POSTS</h2>
+        <div class="row">
+          {% for p in post %}
+          <div class="col-lg-4 col-md-6 col-sm-12 pb-4">
+            <div class="card h-100 p-4">
+                <h3>Name: {{p.title}}</h3>
+              <img src="{{ p.image.url }}" class="card-img-top">
+              
+              <p>Description: {{p.content}}</p>
+
+              
+            </div>
+          </div>
+          {% empty %}
+          <p>No existing posts</p>
+          {% endfor %}
+        </div>
+
+      </div>
+    
+
+{% endblock %}

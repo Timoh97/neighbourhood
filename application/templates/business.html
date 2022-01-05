@@ -1,0 +1,40 @@
+
+{% block content %}  
+
+{% load crispy_forms_tags %}  
+    
+        <div class="container">
+
+          <!--Django Form-->
+          <h2 class="my-4">Add Business</h2>
+          <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+              {{form|crispy}}
+                <button class="btn btn-dark my-4" type="submit">Submit</button>
+          </form>
+
+        <!--Django Model-->
+        <h2 class="my-4">Businesses</h2>
+        <div class="row">
+          {% for b in business %}
+          <div class="col-lg-4 col-md-6 col-sm-12 pb-4">
+            <div class="card h-100 p-4">
+                <h3>Title: {{hood.name}}</h3>
+              <img src="{{ hood.picture.url }}" class="card-img-top">
+              
+              <p>Police contacts: {{hood.police_contact}}</p>
+              <p>Location: {{hood.location}}</p>
+              <p>Hospital contacts: {{hood.hospital_address}}</p>
+              <p>Number of people: {{hood.persons}}</p>
+              
+            </div>
+          </div>
+          {% empty %}
+          <p>No business registered</p>
+          {% endfor %}
+        </div>
+
+      </div>
+    
+
+{% endblock %}
