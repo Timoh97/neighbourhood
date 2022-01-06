@@ -1,0 +1,26 @@
+{%extends 'base.html'%}
+{% load static %}
+{% load bootstrap4 %}
+{% block styles %}
+{{ block.super}}
+
+{% endblock %}
+
+{% block content %}
+<div class="box" style="background-image: url();">
+    <div class="text-center" style="padding: 5em; background-image: url(https://static9.depositphotos.com/1015060/1155/i/600/depositphotos_11551407-stock-photo-suburban-homes.jpg); background-repeat: no-repeat; background-size: cover; height: fit-content;">
+    <h2 style="color: red;" class="text-center">Create a <span style="color: white;">profile</span></h2>
+    <hr>
+    
+
+      <div class="block-center" style="background-color: white; width: fit-content; padding: 1em; border-radius: 10px;">
+        <form action="{%url 'create_profile'%}" style="background-color: transparent;" method="post" enctype="multipart/form-data">
+            {%csrf_token%}    
+            {% bootstrap_form form%}
+            <input type="submit" class="btn btn-dark " value="Create Profile">
+        </form>
+      </div>
+    </div>
+
+</div>
+{% endblock %}

@@ -1,39 +1,92 @@
-
-{% block content %}  
-
-{% load crispy_forms_tags %}  
-    
-        <div class="container">
-
-          <!--Django Form-->
-          <h2 class="my-4">CREATE PROFILE</h2>
-          <form method="post" enctype="multipart/form-data">
-            {% csrf_token %}
-              {{form|crispy}}
-                <button class="btn btn-dark my-4" type="submit">Submit</button>
-          </form>
-
-        <!--Django Model-->
-        <h2 class="my-4">Profile</h2>
+{% extends "base.html" %}
+{% block content %}
+<br><br>
+<br><br>
+<ul class="dropdown-menu" role="menu">
+    <li>
+      <button btn btn-dark><a href="{% url 'index' %}">home</a></button>
+    </li>
+</ul>
+<section class="profile container">
+    <div class=" mt-5">
         <div class="row">
-          {% for p in profile %}
-          <div class="col-lg-4 col-md-6 col-sm-12 pb-4">
-            <div class="card h-100 p-4">
-                <h3>Name: {{p.name}}</h3>
-              <img src="{{ p.picture.url }}" class="card-img-top">
-              
-              <p>Email: {{p.email}}</p>
-              <p>Location: {{p.location}}</p>
-              <p>Neighbourhood: {{p.neighbourhood}}</p>
-              
+            <div class="col-md-3">
+                <div class="card">
+                    {% if profile.profile_photo %}
+                    <img src="{{profile.profile_photo.url}}" width="254" alt="" style="border-radius: 50%;">
+                    {%else%}
+                    <img src="https://st2.depositphotos.com/1104517/11965/v/600/depositphotos_119659092-stock-illustration-male-avatar-profile-picture-vector.jpg"
+                        class="card-img-top" alt="My profile picture">
+                    {% endif %}
+                    <div class="card-body text-center">
+                        <h4 class="card-text">
+                            {{ user.first_name }} {{ user.last_name }}
+                        </h4>
+                        <p>{{ user.username }}</p>
+                        
+                        <p>
+                            {% if profile.bio %}
+                            <small>{{ profile.bio }}</small>
+                            {% else %}
+                            <span class="text-danger">No about me</span>
+                            {% endif %}
+                        </p>
+                        <h6>Joined on: <span class="badge rounded-pill bg-secondary text-white">
+                                {{ user.date_joined }} </span></h6>
+                                <p>{{ profile.contact }}</p>
+                        
+                    </div>
+                </div>
             </div>
-          </div>
-          {% empty %}
-          <p>No existing profile</p>
-          {% endfor %}
         </div>
+    </div>
 
-      </div>
-    
+    <div class="modal fade" id="showPicModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered mode" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="modalPictureTitle">title</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form }}
+                <button type="submit">Add Post</button>
+              </form>
+            </div>
+            <div class="modal-footer">
+</section>
+<div class="container">
+    <h3>posts</h3>
+        {% for image in images %}
+        <div class="">
+            <h3>Name of photo: {{ image.profile_pic }}</h3>
+            
+                <div class="">
+                    <p>Location: {{ image.location }}</p>
+                    <p>Email: {{ image.email }}</p>
+                </div>
+                <p>Neighbourhood: {{ image.neighbourhood }}</p>
+                <p>Caption: {{ image.photo_caption }}</p>
+                <p>Time posted: {{ image.posted_at }}</p>
+                <p>Time posted: {{ image.update_at }}</p>
 
+        </div>
+        {% empty %}
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            <div class="alert alert-info" role="alert">
+                No images!
+            </div>
+        </div>
+        {% endfor %}
+        <div class="col-md-3">
+            <form action="/upload/project/">
+                <input type="submit" style=" background :linear-gradient(to left,#3b0303,#d145fc)" value="Post a Project" /> 
+            </form>
+        </div>
+</div>
 {% endblock %}

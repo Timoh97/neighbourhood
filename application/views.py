@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from .models import *
+from django.http  import HttpResponse,HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 import cloudinary
@@ -27,14 +28,43 @@ def home(request):
 
 @login_required(login_url='/accounts/login/')
 def profile(request):
-	if request.method == "POST":
-		form = ProfileForm(request.POST, request.FILES)
-		if form.is_valid():
-			form.save()
-		return redirect("application:profile")
-	form = ProfileForm()
-	profile= Profile.objects.all()
-	return render(request=request, template_name="profile.html", context={'form':form, 'profile':profile})
+    current_user = request.user
+    profile = Profile.objects.filter(user_id=current_user.id).first()
+    project = NeighbourHood.objects.filter(id=current_user.id).first()
+    return render(request,"profile.html",{'profile':profile,'project':project})
+
+def update_profile(request,id):
+    user = User.objects.get(id=id)
+    profile = Profile.objects.get(user = user)
+    form = UpdateProfileForm(instance=profile)
+    if request.method == "POST":
+            form = UpdateProfileForm(request.POST,request.FILES,instance=profile)
+            if form.is_valid():  
+                
+                profile = form.save(commit=False)
+                profile.save()
+                return redirect('profile') 
+            
+    ctx = {"form":form}
+    return render(request, 'update_profile.html', ctx)
+
+
+@login_required(login_url='/accounts/login/')
+def create_profile(request):
+    current_user = request.user
+    title = "Create Profile"
+    if request.method == 'POST':
+        form = ProfileForm(request.POST, request.FILES)
+        if form.is_valid():
+            profile = form.save(commit=False)
+            profile.user = current_user
+            profile.save()
+        return HttpResponseRedirect('/')
+
+    else:
+        form = ProfileForm()
+    return render(request, 'create_profile.html', {"form": form, "title": title})
+
 
 @login_required(login_url='/accounts/login/')
 def business(request):
