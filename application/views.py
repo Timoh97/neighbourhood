@@ -23,7 +23,7 @@ def home(request):
 			form.save()
 		return HttpResponseRedirect('/')
 	form = NeighborForm()
-	home = Business.objects.all()
+	home = NeighbourHood.objects.all()
     
 	return render(request=request, template_name="home.html", context={'form':form, 'home':home})
 
@@ -44,7 +44,7 @@ def upload(request):
 def profile(request):
     current_user = request.user
     profile = Profile.objects.filter(user_id=current_user.id).first()
-    project = NeighbourHood.objects.filter(id=current_user.id).first()
+    project = NeighbourHood.objects.all()
     return render(request,"profile.html",{'profile':profile,'project':project})
 
 def update_profile(request,id):
