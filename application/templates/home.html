@@ -1,4 +1,6 @@
 
+{% extends 'base.html' %}
+{% load cloudinary %} {% load bootstrap4 %}
 {% block content %}  
 
 
@@ -7,7 +9,7 @@
 
 
         <!--Django Model-->
-        <h2 class="my-4">Neighbourhood</h2>
+        <h2 class="text-center">Neighbourhoods</h2>
         <div class="row">
           {% for hood in home %}
           <div class="col-lg-4 col-md-6 col-sm-12 pb-4">

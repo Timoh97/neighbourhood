@@ -23,9 +23,9 @@ def home(request):
 			form.save()
 		return HttpResponseRedirect('/')
 	form = NeighborForm()
-	neighbour = NeighbourHood.objects.all().order_by('-id')
+	home = Business.objects.all()
     
-	return render(request=request, template_name="home.html", context={'form':form, 'neighbour':neighbour})
+	return render(request=request, template_name="home.html", context={'form':form, 'home':home})
 
 
 def upload(request):
@@ -37,6 +37,7 @@ def upload(request):
         return redirect('/')
     else:
         form = NeighborForm()
+        
     return render(request, 'upload.html', {"form": form})
 
 @login_required(login_url='/accounts/login/')
@@ -78,18 +79,6 @@ def create_profile(request):
         form = ProfileForm()
     return render(request, 'create_profile.html', {"form": form, "title": title})
 
-@login_required(login_url='/accounts/login/')
-def upload(request):
-    if request.method == "POST":
-        form = NeighborForm(request.POST, request.FILES)
-        if form.is_valid():
-            project = form.save(commit=False)
-            project.save()
-        return redirect('/')
-    else:
-        form = NeighborForm()
-    return render(request, 'upload.html', {"form": form})
-
 
 @login_required(login_url='/accounts/login/')
 def business(request):
@@ -99,8 +88,8 @@ def business(request):
 			form.save()
 		return HttpResponseRedirect('/business')
 	form = BusinessForm()
-	biz = Business.objects.all()
-	return render(request=request, template_name="business.html", context={'form':form, 'biz':biz})
+	business = Business.objects.all()
+	return render(request=request, template_name="business.html", context={'form':form, 'business':business})
 
 @login_required(login_url='/accounts/login/')
 def post(request):
@@ -122,3 +111,12 @@ def create_post(request):
 		return HttpResponseRedirect('post/')
 	form = PostForm()
 	return render(request=request, template_name="create_post.html", context={'form':form})
+
+def create_business(request):
+	if request.method == "POST":
+		form = BusinessForm(request.POST, request.FILES)
+		if form.is_valid():
+			form.save()
+		return HttpResponseRedirect('/business')
+	form = BusinessForm()
+	return render(request=request, template_name="create_business.html", context={'form':form})
