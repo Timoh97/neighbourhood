@@ -21,10 +21,23 @@ def home(request):
 		form = NeighborForm(request.POST, request.FILES)
 		if form.is_valid():
 			form.save()
-		return redirect("application:home")
+		return HttpResponseRedirect('/')
 	form = NeighborForm()
-	neighbour = NeighbourHood.objects.all()
+	neighbour = NeighbourHood.objects.all().order_by('-id')
+    
 	return render(request=request, template_name="home.html", context={'form':form, 'neighbour':neighbour})
+
+
+def upload(request):
+    if request.method == "POST":
+        form = NeighborForm(request.POST, request.FILES)
+        if form.is_valid():
+            project = form.save(commit=False)
+            project.save()
+        return redirect('/')
+    else:
+        form = NeighborForm()
+    return render(request, 'upload.html', {"form": form})
 
 @login_required(login_url='/accounts/login/')
 def profile(request):
@@ -65,6 +78,18 @@ def create_profile(request):
         form = ProfileForm()
     return render(request, 'create_profile.html', {"form": form, "title": title})
 
+@login_required(login_url='/accounts/login/')
+def upload(request):
+    if request.method == "POST":
+        form = NeighborForm(request.POST, request.FILES)
+        if form.is_valid():
+            project = form.save(commit=False)
+            project.save()
+        return redirect('/')
+    else:
+        form = NeighborForm()
+    return render(request, 'upload.html', {"form": form})
+
 
 @login_required(login_url='/accounts/login/')
 def business(request):
@@ -72,7 +97,7 @@ def business(request):
 		form = BusinessForm(request.POST, request.FILES)
 		if form.is_valid():
 			form.save()
-		return redirect("application:business")
+		return HttpResponseRedirect('/business')
 	form = BusinessForm()
 	biz = Business.objects.all()
 	return render(request=request, template_name="business.html", context={'form':form, 'biz':biz})
@@ -83,11 +108,17 @@ def post(request):
 		form = PostForm(request.POST, request.FILES)
 		if form.is_valid():
 			form.save()
-		return redirect("application:post")
+		return HttpResponseRedirect('post/')
 	form = PostForm()
 	post = Post.objects.all()
 	return render(request=request, template_name="post.html", context={'form':form, 'post':post})
-
-
-    
-    
+ 
+@login_required(login_url='/accounts/login/')    
+def create_post(request):
+	if request.method == "POST":
+		form = PostForm(request.POST, request.FILES)
+		if form.is_valid():
+			form.save()
+		return HttpResponseRedirect('post/')
+	form = PostForm()
+	return render(request=request, template_name="create_post.html", context={'form':form})
