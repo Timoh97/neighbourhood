@@ -1,4 +1,4 @@
-
+from django.conf.urls import include
 from django.conf import settings
 from django.conf.urls.static import static
 from django.urls import path
@@ -20,6 +20,7 @@ path("business/", views.business, name="business"),
 path("post/", views.post, name="post"),
 path('upload/project/', views.upload, name = "upload"),
 path('accounts/profile/', views.index, name='accounts'),
+path('search/', views.search_results, name='search_results'),
 
 ]
 

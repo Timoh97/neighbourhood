@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  {% block styles %}
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  {% endblock %}
+  <nav class="navbar navbar-default" style="padding: 1.3em; background-color: #192841;">
+    <div class="container-fluid">
+      <div style="background-color: white; padding: .2em;"><img src="https://cdn-icons-png.flaticon.com/512/819/819590.png" width="50" alt=""></div>
+      <div class="col-sm-2 col-md-2 navbar-header">
+        
+        <button class="btn btn-default" style="border: .5em solid beige; border-radius: 10px;"><a class="navbar-brand" href=""><a href="{% url 'index' %}">HOME </a></a></button>
+      </div>
+
+      <div class="col-sm-3 col-md-3 navbar-right">
+        
+        <form class="navbar-form" role="search" action="">
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="Search by category" name="search"> 
+            <div class="input-group-btn">
+              <button class="btn btn-dark"  action="{% url 'search_results' %}" type="submit"><i class="glyphicon glyphicon-search"></i>Search</button>
+            </div>
+          </div>
+        </form>
+      </div>
+      <button class="btn btn-default" style="border: .5em solid beige; border-radius: 10px;"><a href="/create_profile" class="col-sm-3 col-md-3 col-lg-3">Create Profile</a></button>
+      <button class="btn btn-default" style="border: .5em solid beige; border-radius: 10px;"><a href="/accounts/profile/" class="col-sm-3 col-md-3 col-lg-3">Profile</a></button>
+      <div class="col-sm-1 col-md-1">
+        <button class="btn btn-default" style="border: .5em solid beige; border-radius: 10px;"><a href="/search" class="col-sm-3 col-md-3 col-lg-3">Search</a></button>
+      </div>
+<div style="background-color: white; padding: .2em;"><img src="https://cdn-icons.flaticon.com/png/512/518/premium/518552.png?token=exp=1639234949~hmac=f8492e562c20c0830ac8475537874715" width="50" alt=""></div>
+    </div>
+  </nav>
+  
+{% block content %}
+<div class="container" style="margin-top: 2em;padding: 2em; border-radius: 10px; border: .2em solid #192841;">
+
+  <div class="row" style="background-color: #192841;; padding: 2em; margin: .2em;">
+    {% if business %}
+    
+      <h2 class="text-center" style="color: red;" >Wow! Found <span style="color: blue;">{{ images|length }}</span> of searched item in category <span style="color: blue;">{{message}} &#128151;</span></h2>
+    {% else %}
+      <h2 class="text-center" style="color: white;"> Found none of the images for the search category {{message}} &#128514;</h2>
+      
+    {% endif %}
+
+  </div>
+
+  <div class="row" style="background-color: #192841;; padding: 2em; margin: .2em;">
+  {% if images %}
+    {% for image in images %}
+      <div class="" >
+        <img src="{{ image.image.url}}" width="200">
+        <p class="text" style="font-size: xx-large; color: white;">The picture is taken in <span style="color: blue;">{{image.location}}</span></p>
+        <p class="text" style="font-size: xx-large; color: white;">Description: {{image.description}}</p>
+       
+      </div>
+    {% endfor %}
+  {% endif %}
+  </div>
+</div>
+{% endblock %}
+
+</body>
+</html>

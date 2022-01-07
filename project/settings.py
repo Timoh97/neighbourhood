@@ -39,7 +39,6 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'crispy_forms',
     'application',
     'bootstrap4',
     'cloudinary',

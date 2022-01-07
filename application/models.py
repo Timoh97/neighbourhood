@@ -5,14 +5,6 @@ from django.contrib.auth.models import User
 # cloudinary
 from cloudinary.models import CloudinaryField
 
-
-# category model
-
-
-
-
-
-
 # NeighbourHood Model
 class NeighbourHood(models.Model):
     name = models.CharField(max_length=50)
@@ -91,11 +83,15 @@ class Business(models.Model):
     # update business
     def update_business(self):
         self.update()
-
+        
+    # @classmethod
+    # def search_image(cls,search_term):
+    #    images = cls.objects.filter(category__icontains=search_term)
+    #    return 
     # search business
     @classmethod
-    def search_by_name(cls, search_term):
-        business = cls.objects.filter(name__icontains=search_term)
+    def search_name(cls, search_term):
+        business = cls.objects.filter(category__icontains=search_term)
         return business
 
     # find business by id

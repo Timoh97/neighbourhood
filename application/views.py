@@ -4,6 +4,7 @@ from django.http  import HttpResponse,HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 import cloudinary
+from django.shortcuts import get_object_or_404, render, redirect
 import cloudinary.uploader
 import cloudinary.api
 from .forms import *
@@ -14,6 +15,8 @@ from .forms import *
 def index(request):
    
     return render(request, 'index.html')
+
+
 
 @login_required(login_url='/accounts/login/')
 def home(request):
@@ -79,7 +82,19 @@ def create_profile(request):
         form = ProfileForm()
     return render(request, 'create_profile.html', {"form": form, "title": title})
 
+def search_results(request):
 
+    if "search"in request.GET and request.GET["search"]:
+        search_term = request.GET.get("search")
+        searched_images = Business.search_name(search_term)
+        message = f"{search_term}"
+
+        return render(request, 'search.html',{"message":message,"images": searched_images})
+
+    else:
+        message = "You haven't searched for any term"
+        return render(request, 'search.html',{"message":message})
+    
 @login_required(login_url='/accounts/login/')
 def business(request):
 	if request.method == "POST":
@@ -93,6 +108,7 @@ def business(request):
 
 @login_required(login_url='/accounts/login/')
 def post(request):
+    #    neighbors=NeighbourHood.objects.get(id=neighbour_id)
 	if request.method == "POST":
 		form = PostForm(request.POST, request.FILES)
 		if form.is_valid():
@@ -100,6 +116,7 @@ def post(request):
 		return HttpResponseRedirect('post/')
 	form = PostForm()
 	post = Post.objects.all()
+     
 	return render(request=request, template_name="post.html", context={'form':form, 'post':post})
  
 @login_required(login_url='/accounts/login/')    
