@@ -2,6 +2,9 @@
 
 Neighborhood application
 
+## DESCRIPTION
+Neighbourhood application allow users to interact more with their neighbourhoods and get to know what's happening.
+
 ## REQUIRED FEATURES
 
 * Creating profile.
