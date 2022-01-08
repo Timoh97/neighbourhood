@@ -33,7 +33,7 @@ Python3
 
 Virtual Environment
 
-django
+django==3.2.9 version
 
 ## TECHNOLOGIES AND LANGUAGES
 
