@@ -51,7 +51,7 @@ HTML
 
 ## INSTALLATION AND SET UP
 
-Git clone the repository at 
+Git clone the repository at git@github.com:Timoh97/neighbourhood.git
 
 
 #### CREATION AND ACTIVATION OF VIRTUAL ENVIRONMENT
