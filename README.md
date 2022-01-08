@@ -4,7 +4,12 @@ Neighborhood application
 
 ## REQUIRED FEATURES
 
-
+* Creating profile.
+* Adding businesses in the neighborhood.
+* Creating the neighborhood.
+* Joining the neighborhood.
+* Posting what's happening in the neighborhood.
+* Searching the businesses in the neighborhood.
 
 ## DESIGN
 Our design practice offers a full range of services including brand strategy, interaction and visual design and user experience testing.
