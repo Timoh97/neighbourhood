@@ -48,6 +48,17 @@ Css
 Bootstrap
 
 HTML
+## SCREENSHOTS
+  <img src="./screenshots/1.png" alt="screenshot" />
+
+  <img src="./screenshots/2.png" alt="screenshot" />
+
+  <img src="./screenshots/3.png" alt="screenshot" />
+
+  <img src="./screenshots/4.png" alt="screenshot" />
+
+  <img src="./screenshots/5.png" alt="screenshot" />
+
 
 ## INSTALLATION AND SET UP
 
